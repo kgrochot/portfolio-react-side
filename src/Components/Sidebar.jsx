@@ -60,7 +60,7 @@ const Sidebar = () => {
 
       {/* Download Button */}
       <a
-        href="/CV_KatarzynaGrochot.pdf"
+        href="/Lebenslauf_Katarzyna Grochot_2026.pdf"
         download
         className="mt-10 flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded hover:bg-blue-700 transition"
       >

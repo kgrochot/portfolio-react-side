@@ -2,6 +2,7 @@ import React from 'react'
 import herrlesNord from '../../assets/herrlesNord.png'
 import alteFabrik from '../../assets/altefabrikstudios.png'
 import herrlesRobotics from '../../assets/herrlesRobotics.png' 
+import teeAtelier from '../../assets/teeAtelier.png'
 import { FaExternalLinkAlt } from 'react-icons/fa'
 
 const projects = [
@@ -22,7 +23,13 @@ const projects = [
     description: 'Webseite der Firma HERRLES mit Fokus auf Robotiklösungen.',
     image: herrlesRobotics,
     link: 'https://herrles-robotics.com/'
-  }
+  },
+  {
+  title: 'TeeAtelier',
+  description: 'Meine GitHub Page für das TeeAtelier – eine moderne Webseite rund um Tee.',
+  image: teeAtelier,
+  link: 'https://kgrochot.github.io/TeeAtelier/'
+}
 ]
 
 const PortfolioData = () => (
