@@ -2,7 +2,7 @@ import React from 'react'
 import herrlesNord from '../../assets/herrlesNord.png'
 import alteFabrik from '../../assets/altefabrikstudios.png'
 import herrlesRobotics from '../../assets/herrlesRobotics.png' 
-import teeAtelier from '../../assets/teeAtelier.png'
+import teeAtelier from '../../assets/teeatelier.png'
 import { FaExternalLinkAlt } from 'react-icons/fa'
 
 const projects = [
