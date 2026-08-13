@@ -29,15 +29,18 @@ const Home = () => {
       {/* Hero Section */}
       <section
         aria-labelledby="hero-section"
-        className="flex flex-col md:flex-row items-center md:items-start gap-12"
+        className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12 w-full"
       >
         <div className="flex-1">
-          <h1 id="hero-section" className="text-5xl font-bold mb-4">
+          <h1
+            id="hero-section"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 leading-tight"
+          >
             Hallo, ich bin Katarzyna Grochot
           </h1>
 
           <h2
-            className="text-2xl text-blue-400 mb-6"
+            className="text-lg sm:text-xl md:text-2xl text-blue-400 mb-4 md:mb-6"
             aria-label="Webentwicklerin, UI/UX Designerin, Frontend Entwicklerin"
           >
             <Typewriter
@@ -55,25 +58,25 @@ const Home = () => {
             />
           </h2>
 
-          <p className="text-xl text-gray-100 mb-8 max-w-lg">
+          <p className="text-base sm:text-lg md:text-xl text-gray-100 mb-6 md:mb-8 max-w-lg">
             Ich erstelle kreative Webseiten und moderne Benutzeroberflächen mit
             React & Tailwind CSS.
           </p>
 
-          <div className="flex gap-4">
+          <div className="flex flex-row flex-wrap gap-3 sm:gap-4">
             <a
               href="#contact"
               aria-label="Schreib mir"
-              className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="flex items-center justify-center gap-2 px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base bg-blue-600 hover:bg-blue-700 rounded transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               <FaEnvelope /> Schreib mir
             </a>
             <a
-              href="/Lebenslauf_Katarzyna Grochot_2026.pdf"
+              href={`${import.meta.env.BASE_URL}Lebenslauf_Katarzyna%20Grochot_2026.pdf`}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="CV anzeigen"
-              className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="flex items-center justify-center gap-2 px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base bg-blue-600 hover:bg-blue-700 rounded transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               <FaDownload /> CV anzeigen
             </a>
@@ -81,7 +84,7 @@ const Home = () => {
         </div>
 
         {/* Bild */}
-        <div className="w-64 h-64 p-2 bg-white rounded-lg shadow-xl transform rotate-3 hover:rotate-0 transition">
+        <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 p-2 bg-white rounded-lg shadow-xl transform rotate-3 hover:rotate-0 transition shrink-0">
           <img
             src={mainImg}
             alt="Katarzyna Grochot"
