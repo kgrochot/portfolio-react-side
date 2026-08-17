@@ -1,88 +1,136 @@
-import React, { useState } from 'react'
-import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
+import React, { useState } from "react";
+import { FaPaperPlane } from "react-icons/fa";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  })
+  const [result, setResult] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  const onSubmit = async (event) => {
+    event.preventDefault();
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    alert(`Danke, ${formData.name}! Deine Nachricht wurde gesendet.`)
-    setFormData({ name: '', email: '', message: '' })
-  }
+    setIsSending(true);
+    setResult("");
+
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", "f761ad67-d562-4f15-81cd-14b9a17fd29d");
+
+    formData.append("subject", "Neue Nachricht über mein Portfolio");
+
+    formData.append("from_name", "Katarzyna Grochot Portfolio");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      console.log(data);
+
+      if (data.success) {
+        setResult("Danke! Deine Nachricht wurde erfolgreich gesendet. 😊");
+
+        event.target.reset();
+      } else {
+        setResult(
+          `Fehler: ${data.message || "Nachricht konnte nicht gesendet werden."}`,
+        );
+      }
+    } catch (error) {
+      console.error(error);
+
+      setResult("Verbindungsfehler beim Senden.");
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   return (
-    <div className="max-w-4xl mx-auto px-8 py-16 text-white">
-      
-      <h1 className="text-4xl font-bold mb-12">
-        <span className="text-white">Kontaktiere</span> <span className="text-blue-500">mich</span>
-      </h1>
+    <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 text-white">
+      {/* Überschrift */}
+      <div className="mb-10 md:mb-14">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">
+          <span className="text-white">Kontaktiere</span>{" "}
+          <span className="text-blue-500">mich</span>
+        </h1>
 
-      <div className="grid md:grid-cols-2 gap-12">
+        <p className="text-gray-300 text-base sm:text-lg leading-relaxed max-w-xl">
+          Du hast eine spannende Stelle, ein Projekt oder möchtest dich einfach
+          austauschen? Ich freue mich auf deine Nachricht.
+        </p>
+      </div>
 
-        {/* Kontaktinformationen */}
-        <div className="space-y-6">
-          <div className="flex items-center gap-4">
-            <FaEnvelope className="text-blue-500 text-2xl" />
-            <span>info@katarzynagrochot.de</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <FaPhone className="text-blue-500 text-2xl" />
-            <span>+49 170 1234567</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <FaMapMarkerAlt className="text-blue-500 text-2xl" />
-            <span>Altenburg, Deutschland</span>
-          </div>
-        </div>
+      {/* Formular */}
+      <form onSubmit={onSubmit} className="w-full max-w-xl flex flex-col gap-5">
+        {/* Name */}
+        <div className="flex flex-col gap-2">
+          <label htmlFor="name" className="text-sm font-medium text-gray-300">
+            Name
+          </label>
 
-        {/* Kontaktformular */}
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <input
+            id="name"
             type="text"
             name="name"
-            value={formData.name}
-            onChange={handleChange}
             placeholder="Dein Name"
-            className="p-4 rounded bg-[#0d1a12] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
+            className="w-full px-4 py-3.5 rounded-lg bg-[#0d1a12] border border-gray-700 text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
           />
+        </div>
+
+        {/* E-Mail */}
+        <div className="flex flex-col gap-2">
+          <label htmlFor="email" className="text-sm font-medium text-gray-300">
+            E-Mail
+          </label>
+
           <input
+            id="email"
             type="email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Deine E-Mail"
-            className="p-4 rounded bg-[#0d1a12] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="deine@email.de"
             required
+            className="w-full px-4 py-3.5 rounded-lg bg-[#0d1a12] border border-gray-700 text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
           />
-          <textarea
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            placeholder="Deine Nachricht"
-            rows={5}
-            className="p-4 rounded bg-[#0d1a12] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-          <button
-            type="submit"
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded text-white font-semibold transition"
+        </div>
+
+        {/* Nachricht */}
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="message"
+            className="text-sm font-medium text-gray-300"
           >
-            Nachricht senden
-          </button>
-        </form>
+            Nachricht
+          </label>
 
-      </div>
+          <textarea
+            id="message"
+            name="message"
+            rows={6}
+            placeholder="Erzähl mir gerne etwas über deine Anfrage..."
+            required
+            className="w-full px-4 py-3.5 rounded-lg bg-[#0d1a12] border border-gray-700 text-white placeholder-gray-500 outline-none resize-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+          />
+        </div>
+
+        {/* Button */}
+        <button
+          type="submit"
+          disabled={isSending}
+          className="w-full sm:w-auto self-start flex items-center justify-center gap-2 px-6 py-3.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg text-white font-semibold transition"
+        >
+          <FaPaperPlane />
+
+          {isSending ? "Wird gesendet..." : "Nachricht senden"}
+        </button>
+
+        {/* Ergebnis */}
+        {result && <p className="text-sm text-gray-300 -mt-2">{result}</p>}
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;
