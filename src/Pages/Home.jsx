@@ -6,15 +6,15 @@ import mainImg from "../assets/meinFoto.jpeg";
 // Beispiel-Daten für Projekte
 const projects = [
   {
-    title: "Portfolio Webseite",
-    description:
-      "Meine persönliche Portfolio-Seite mit React und Tailwind CSS.",
-    link: "#",
+    title: "Portfolio",
+    description: "Meine aktuelle Portfolio-Webseite.",
+    link: `${import.meta.env.BASE_URL}portfolio`,
   },
   {
-    title: "E-Commerce Shop",
-    description: "Ein kleiner Online-Shop mit React und Stripe Integration.",
-    link: "#",
+    title: "Tea Atelier – Webshop",
+    description:
+      "Erweiterung der Tea-Atelier-Website um einen modernen Online-Shop.",
+    link: "https://kgrochot.github.io/Tee-Shop/",
   },
   {
     title: "Blog Plattform",
@@ -122,9 +122,10 @@ const Home = () => {
             <a
               key={index}
               href={project.link}
-              tabIndex={0} // Fokusbar für Tastatur
-              aria-label={`${project.title}: ${project.description}`} // Screenreader
-              className="bg-[#0d1a12] p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 flex flex-col items-center text-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${project.title}: ${project.description}`}
+              className="w-full bg-[#0d1a12] p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 flex flex-col items-center text-center"
             >
               <h3 className="text-xl font-semibold mb-2 text-white">
                 {project.title}
