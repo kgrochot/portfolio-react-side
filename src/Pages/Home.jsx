@@ -3,26 +3,34 @@ import { FaDownload, FaEnvelope } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
 import mainImg from "../assets/meinFoto.jpeg";
 import { Link } from "react-router-dom";
+import bikeTravelImg from "../assets/himmel.jpeg";
+import teaAtelierImg from "../assets/tee-raum.jpg";
+import portfolioImg from "../assets/portfolio.png";
 
-// Beispiel-Daten für Projekte
 const projects = [
   {
     title: "Portfolio",
     description: "Meine aktuelle Portfolio-Webseite.",
+    image: portfolioImg,
+    category: "React",
     link: "/portfolio",
     internal: true,
   },
   {
-    title: "Tea Atelier – Webshop",
+    title: "Tea Atelier",
     description:
-      "Erweiterung der Tea-Atelier-Website um einen modernen Online-Shop.",
+      "Eine stilvolle Website rund um Tee, Teesorten und Wissenswertes über die Welt des Tees.",
+    image: teaAtelierImg,
+    category: "Webdesign",
     link: "https://kgrochot.github.io/Tee-Shop/",
     internal: false,
   },
   {
     title: "Bike & Travel",
     description:
-      "Moderne Blog-Plattform für Fahrradtouren, Reiseziele und Outdoor-Abenteuer mit CMS-Integration und responsive Design.",
+      "Eine Blog-Plattform für Fahrradtouren, Reiseziele und Outdoor-Abenteuer mit CMS-Integration und responsive Design.",
+    image: bikeTravelImg,
+    category: "React",
     link: "#",
     internal: false,
   },
@@ -74,8 +82,10 @@ const Home = () => {
               aria-label="Schreib mir"
               className="flex items-center justify-center gap-2 px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base bg-blue-600 hover:bg-blue-700 rounded transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
-              <FaEnvelope /> Schreib mir
+              <FaEnvelope />
+              Schreib mir
             </a>
+
             <a
               href={`${import.meta.env.BASE_URL}Lebenslauf_Katarzyna%20Grochot_2026.pdf`}
               target="_blank"
@@ -83,7 +93,8 @@ const Home = () => {
               aria-label="CV anzeigen"
               className="flex items-center justify-center gap-2 px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base bg-blue-600 hover:bg-blue-700 rounded transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
-              <FaDownload /> CV anzeigen
+              <FaDownload />
+              CV anzeigen
             </a>
           </div>
         </div>
@@ -97,8 +108,7 @@ const Home = () => {
           />
         </div>
       </section>
-
-      {/* Intro / Kurzinfo */}
+      {/* Intro */}
       <section
         aria-labelledby="intro-section"
         className="space-y-4 max-w-xl text-gray-100"
@@ -106,37 +116,82 @@ const Home = () => {
         <h2 id="intro-section" className="sr-only">
           Einführung
         </h2>
+
         <p>
           Willkommen auf meinem Portfolio! Hier zeige ich meine Projekte,
           Services und kreative Arbeiten. Ich kombiniere modernes Design mit
           funktionalem Code, um ansprechende Benutzererlebnisse zu schaffen.
         </p>
+
         <p>
-          Schau dir meine Projekte an und kontaktiere mich für eine
+          Schau dir meine Projekte an und kontaktiere mich gerne für eine
           Zusammenarbeit!
         </p>
       </section>
 
-      {/* Featured Projekte */}
+      {/* Meine Projekte */}
       <section aria-labelledby="projects-section" className="w-full">
-        <h2 id="projects-section" className="text-3xl font-bold mb-6">
-          Featured Projekte
-        </h2>
+        <div className="mb-8">
+          <p className="text-sm uppercase tracking-[0.2em] text-blue-400 mb-2">
+            Arbeiten & Projekte
+          </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-          {projects.map((project, index) =>
-            project.internal ? (
+          <h2 id="projects-section" className="text-3xl md:text-4xl font-bold">
+            Meine Projekte
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project, index) => {
+            const cardContent = (
+              <>
+                {/* Projektbild */}
+                <div className="relative h-56 overflow-hidden bg-gray-900/60">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
+                </div>
+
+                {/* Karteninhalt */}
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-sm text-gray-500">0{index + 1}</span>
+
+                    <span className="text-xs uppercase tracking-wider text-blue-400">
+                      {project.category}
+                    </span>
+                  </div>
+
+                  <h3 className="text-2xl font-semibold text-white mb-3">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-gray-400 leading-relaxed mb-6">
+                    {project.description}
+                  </p>
+
+                  <span className="inline-flex items-center gap-2 text-sm text-gray-300 group-hover:text-blue-400 transition">
+                    Projekt ansehen
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">
+                      →
+                    </span>
+                  </span>
+                </div>
+              </>
+            );
+
+            return project.internal ? (
               <Link
                 key={index}
                 to={project.link}
                 aria-label={`${project.title}: ${project.description}`}
-                className="w-full bg-[#0d1a12] p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 flex flex-col items-center text-center"
+                className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:border-blue-400/40 hover:bg-white/[0.07] hover:shadow-2xl"
               >
-                <h3 className="text-xl font-semibold mb-2 text-white">
-                  {project.title}
-                </h3>
-
-                <p className="text-gray-300">{project.description}</p>
+                {cardContent}
               </Link>
             ) : (
               <a
@@ -145,16 +200,12 @@ const Home = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${project.title}: ${project.description}`}
-                className="w-full bg-[#0d1a12] p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 flex flex-col items-center text-center"
+                className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:border-blue-400/40 hover:bg-white/[0.07] hover:shadow-2xl"
               >
-                <h3 className="text-xl font-semibold mb-2 text-white">
-                  {project.title}
-                </h3>
-
-                <p className="text-gray-300">{project.description}</p>
+                {cardContent}
               </a>
-            ),
-          )}
+            );
+          })}
         </div>
       </section>
     </main>
