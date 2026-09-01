@@ -20,8 +20,9 @@ const projects = [
     internal: false,
   },
   {
-    title: "Blog Plattform",
-    description: "Blog-Seite mit CMS-Integration und responsive Design.",
+    title: "Bike & Travel",
+    description:
+      "Moderne Blog-Plattform für Fahrradtouren, Reiseziele und Outdoor-Abenteuer mit CMS-Integration und responsive Design.",
     link: "#",
     internal: false,
   },
