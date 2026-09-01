@@ -2,24 +2,28 @@ import React from "react";
 import { FaDownload, FaEnvelope } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
 import mainImg from "../assets/meinFoto.jpeg";
+import { Link } from "react-router-dom";
 
 // Beispiel-Daten für Projekte
 const projects = [
   {
     title: "Portfolio",
     description: "Meine aktuelle Portfolio-Webseite.",
-    link: `${import.meta.env.BASE_URL}portfolio`,
+    link: "/portfolio",
+    internal: true,
   },
   {
     title: "Tea Atelier – Webshop",
     description:
       "Erweiterung der Tea-Atelier-Website um einen modernen Online-Shop.",
     link: "https://kgrochot.github.io/Tee-Shop/",
+    internal: false,
   },
   {
     title: "Blog Plattform",
     description: "Blog-Seite mit CMS-Integration und responsive Design.",
     link: "#",
+    internal: false,
   },
 ];
 
@@ -117,22 +121,39 @@ const Home = () => {
         <h2 id="projects-section" className="text-3xl font-bold mb-6">
           Featured Projekte
         </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-          {projects.map((project, index) => (
-            <a
-              key={index}
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${project.title}: ${project.description}`}
-              className="w-full bg-[#0d1a12] p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 flex flex-col items-center text-center"
-            >
-              <h3 className="text-xl font-semibold mb-2 text-white">
-                {project.title}
-              </h3>
-              <p className="text-gray-300">{project.description}</p>
-            </a>
-          ))}
+          {projects.map((project, index) =>
+            project.internal ? (
+              <Link
+                key={index}
+                to={project.link}
+                aria-label={`${project.title}: ${project.description}`}
+                className="w-full bg-[#0d1a12] p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 flex flex-col items-center text-center"
+              >
+                <h3 className="text-xl font-semibold mb-2 text-white">
+                  {project.title}
+                </h3>
+
+                <p className="text-gray-300">{project.description}</p>
+              </Link>
+            ) : (
+              <a
+                key={index}
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${project.title}: ${project.description}`}
+                className="w-full bg-[#0d1a12] p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 flex flex-col items-center text-center"
+              >
+                <h3 className="text-xl font-semibold mb-2 text-white">
+                  {project.title}
+                </h3>
+
+                <p className="text-gray-300">{project.description}</p>
+              </a>
+            ),
+          )}
         </div>
       </section>
     </main>
