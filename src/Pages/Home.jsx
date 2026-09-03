@@ -31,7 +31,7 @@ const projects = [
       "Eine Blog-Plattform für Fahrradtouren, Reiseziele und Outdoor-Abenteuer mit CMS-Integration und responsive Design.",
     image: bikeTravelImg,
     category: "React",
-    link: "#",
+    link: "https://kgrochot.github.io/ReisenBlog/",
     internal: false,
   },
 ];
